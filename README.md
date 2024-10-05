@@ -11,3 +11,11 @@ overdue, and send email notifications for overdue rentals.
 3. Copy `.env.example` to `.env` and configure your database.
 4. Run `PHP artisan migrate --seed` to setup database
 5. RUN  `PHP artisan serve` to start server
+
+
+## API'S
+
+`/api/books/search` -- Search for Books by name and or genre
+             -- Query Paramaters
+             -- `title`
+             -- `genre`
