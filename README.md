@@ -8,5 +8,6 @@ overdue, and send email notifications for overdue rentals.
 ## Setup Instructions
 1. Clone repository
 2. Install dependencies `composer install`
-3. Run `PHP artisan migrate --seed` to setup database
-4. RUN  `PHP artisan serve` to start server
+3. Copy `.env.example` to `.env` and configure your database.
+4. Run `PHP artisan migrate --seed` to setup database
+5. RUN  `PHP artisan serve` to start server
