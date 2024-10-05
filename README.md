@@ -12,10 +12,24 @@ overdue, and send email notifications for overdue rentals.
 4. Run `PHP artisan migrate --seed` to setup database
 5. RUN  `PHP artisan serve` to start server
 
-
 ## API'S
-
 `/api/books/search` -- Search for Books by name and or genre
              -- Query Paramaters
              -- `title`
              -- `genre`
+`/api/books/rent` -- Rent a book
+             -- POST Paramaters
+             -- `book_id`
+             -- `user_id`
+        
+`/api/books/return` -- Return a book
+             -- POST Paramaters
+             -- `rental_id`
+
+`/api/rental/history` -- Check rental history
+             -- Query Paramaters
+             -- `user_id`
+             
+
+## Testing
+`php artisan test`  Run the tests 

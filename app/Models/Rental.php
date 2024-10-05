@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rental extends Model
 {
-    protected $fillable=['book_id','user_id','rented_at','due_date','return_date','status'];
+    protected $fillable=['book_id','user_id','rented_at','due_at','return_at','status'];
 
     public function book(){
         return $this->belongsTo(Book::class);
