@@ -26,13 +26,13 @@ class RentalController extends Controller
         if (Rental::where('book_id', $book->id)->whereNull('return_at')->exists()) {
             return response()->json(['message' => 'Book already rented'], 400);
         }
-
+        $rentalDurationWeeks = config('rental.rental_duration_weeks');
         // Rent the book
         $rental = new Rental();
         $rental->user_id = $request->input('user_id');
         $rental->book_id = $book->id;
         $rental->rented_at = Carbon::now();
-        $rental->due_at = Carbon::now()->addWeeks(2);
+        $rental->due_at = Carbon::now()->addWeeks($rentalDurationWeeks);
         $rental->status = 'rented';
         $rental->save();
 

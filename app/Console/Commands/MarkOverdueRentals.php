@@ -25,8 +25,9 @@ class MarkOverdueRentals extends Command
      */
     public function handle()
     {
+        $rentalDurationWeeks = config('rental.rental_duration_weeks');
         $overdueRentals = Rental::whereNull('return_at')
-            ->where('rented_at', '<', now()->subWeeks(2))
+            ->where('rented_at', '<', now()->subWeeks($rentalDurationWeeks))
             ->update(['status' => 'overdue']);
 
         $this->info('Marked overdue rentals');

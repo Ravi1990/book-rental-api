@@ -14,15 +14,16 @@ class MarkOverdueRentalsTest extends TestCase
    
     public function test_it_marks_rentals_as_overdue_if_not_returned_within_2_weeks()
     {
-        // Arrange
         $book = Book::factory()->create(['title' => 'Pride and Prejudice', 'author' => 'Jane Austen', 'isbn' => '578014119907', 'genre' => 'Romance']);
         $user = User::factory()->create();
+        $rentalDurationWeeks = config('rental.rental_duration_weeks');
+        // rental date to back date past rental duration in such a way to make it expire
         $rental = Rental::create([
             'book_id'   => $book->id,
             'user_id'   => $user->id,
             'status'    => 'rented',
-            'rented_at' => Carbon::now()->subWeeks(3),
-            'due_at' => Carbon::now()->subWeek(1),
+            'rented_at' => Carbon::now()->subWeeks($rentalDurationWeeks+1),
+            'due_at' => Carbon::now()->subWeek($rentalDurationWeeks-1),
         ]);
 
         // Act: Run the command to mark overdue rentals

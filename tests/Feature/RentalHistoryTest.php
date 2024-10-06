@@ -8,11 +8,10 @@ use App\Models\Rental;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
-class BookReturnTest extends TestCase
+class RentalHistoryTest extends TestCase
 {
     use DatabaseTransactions;
-
-    public function test_it_can_return_a_book()
+    public function test_it_can_view_rental_history_for_a_user()
     {
         // Arrange
         $book = Book::factory()->create(['title' => 'Pride and Prejudice', 'author' => 'Jane Austen', 'isbn' => '578014119907', 'genre' => 'Romance']);
@@ -25,24 +24,18 @@ class BookReturnTest extends TestCase
             'due_at' =>  Carbon::now()->addWeeks($rentalDurationWeeks),
             'status'  => 'rented',
         ]);
-
         // Act
-        $response = $this->postJson('/api/books/return', [
-            'rental_id' => $rental->id,
-        ]);
+        $response = $this->getJson('/api/rental/history?user_id=' . $user->id);
 
         // Assert
         $response->assertStatus(200)
-                 ->assertJsonFragment(['status' => 'returned']);
-        $this->assertDatabaseHas('rentals', ['id' => $rental->id, 'status' => 'returned']);
+                 ->assertJsonFragment(['book_id' => $book->id]);
     }
 
-    public function test_it_cannot_return_a_non_existent_rental()
+    public function test_it_returns_422_if_user_id_is_missing()
     {
-        $response = $this->postJson('/api/books/return', [
-            'rental_id' => '9999',
-        ]);
+        $response = $this->getJson('/api/rental/history');
 
-        $response->assertStatus(404);
+        $response->assertStatus(422);
     }
 }
