@@ -18,6 +18,7 @@ overdue, and send email notifications for overdue rentals.
              -- Query Paramaters
              -- `title`
              -- `genre`
+
 `/api/books/rent` -- Rent a book
              -- POST Paramaters
              -- `book_id`
