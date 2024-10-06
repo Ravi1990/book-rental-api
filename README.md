@@ -9,14 +9,16 @@ overdue, and send email notifications for overdue rentals.
 1. Clone repository
 2. Install dependencies `composer install`
 3. Copy `.env.example` to `.env` and configure your database.
-4. Run `PHP artisan migrate --seed` to setup database
-5. RUN  `PHP artisan serve` to start server
+4. `php artisan key:generate` generate key in env
+5. Run `PHP artisan migrate --seed` to setup database
+6. RUN  `PHP artisan serve` to start server
 
 ## API'S
 `/api/books/search` -- Search for Books by name and or genre
              -- Query Paramaters
              -- `title`
              -- `genre`
+
 `/api/books/rent` -- Rent a book
              -- POST Paramaters
              -- `book_id`
