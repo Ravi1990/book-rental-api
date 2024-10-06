@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Console\Commands;
-
+use App\Models\Rental;
 use Illuminate\Console\Command;
 
 class MarkOverdueRentals extends Command
@@ -25,9 +25,9 @@ class MarkOverdueRentals extends Command
      */
     public function handle()
     {
-        $overdueRentals = Rental::whereNull('returned_at')
+        $overdueRentals = Rental::whereNull('return_at')
             ->where('rented_at', '<', now()->subWeeks(2))
-            ->update(['is_overdue' => true]);
+            ->update(['status' => 'overdue']);
 
         $this->info('Marked overdue rentals');
     }

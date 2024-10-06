@@ -13,8 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        // Register your custom commands here
         \App\Console\Commands\SendOverdueEmails::class,
+        \App\Console\Commands\MarkOverdueRentals::class,
     ];
     /**
      * Define the application's command schedule.

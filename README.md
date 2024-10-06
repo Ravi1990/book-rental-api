@@ -29,6 +29,21 @@ overdue, and send email notifications for overdue rentals.
 `/api/rental/history` -- Check rental history
              -- Query Paramaters
              -- `user_id`
+
+`/api/rental/stats` -- Check rental stats
+                    -- Kept it simple with basic details
+
+`/api/rental/overdue` -- Mark overdue manual api action 
+                      -- Schedule aready there but if wanted it manually from some action button
+
+`/api/send-overdue-emails` -- Send overdue email manual api action 
+                      -- Schedule aready there but if wanted it manually from some action button
+
+`php artisan app:mark-overdue-rentals` For marking overdue manually, on server need to setup cron
+
+`php artisan rental:send-overdue-emails` For running overdue email manually, on server need to setup cron
+
+
              
 
 ## Testing

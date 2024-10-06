@@ -22,9 +22,9 @@ class BookSearchTest extends TestCase
         $response->assertJsonFragment(['genre' => 'Classics']);
     }
 
-    public function it_returns_empty_if_no_books_found()
+    public function test_it_returns_empty_if_no_books_found()
     {
-        $response = $this->getJson('/api/books/search?name=NonExistent');
+        $response = $this->getJson('/api/books/search?title=NonExistent');
 
         $response->assertStatus(200)
                  ->assertJsonCount(0);

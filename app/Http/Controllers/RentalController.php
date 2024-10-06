@@ -41,21 +41,25 @@ class RentalController extends Controller
     public function return(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'rental_id' => 'required|exists:rentals,id'
+            'rental_id' => 'required|integer'
         ]);
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
         $rental = Rental::find($request->input('rental_id'));
+        if (!$rental) {
+            return response()->json(['message' => 'Rental not found'], 404);
+        }
         //Again retun already shoudl be done with stock but just keeping it simple for this test
         if ($rental->return_at !== null) {
             return response()->json(['message' => 'Book already returned'], 400);
         }
 
         $rental->return_at = Carbon::now();
+        $rental->status = 'returned';
         $rental->save();
 
-        return response()->json(['message' => 'Book returned successfully']);
+        return response()->json(['message' => 'Book returned successfully','data'=>$rental]);
     }
 
     public function history(Request $request)

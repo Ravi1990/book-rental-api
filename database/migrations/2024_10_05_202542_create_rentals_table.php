@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->date('rented_at');
             $table->date('due_at');
-            $table->date('return_at');
+            $table->date('return_at')->nullable();
             $table->enum('status',['rented','returned','overdue'])->default('rented');
             $table->timestamps();
         });
